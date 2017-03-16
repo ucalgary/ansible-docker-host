@@ -1,0 +1,21 @@
+# Refer to https://docs.docker.com/engine/installation/linux/rhel/
+# and https://docs.docker.com/engine/installation/linux/centos/
+
+- name: Store Docker repository url as a yum variable
+  copy:
+    content: "{{ docker_base_url }}"
+    dest: /etc/yum/vars/dockerurl
+
+- name: Ensure yum-utils is present
+  yum:
+    name: yum-utils
+    state: present
+
+- name: Add the Docker repositories
+  command: yum-config-manager --add-repo {{ docker_repo_url }}
+
+- name: Install the Docker engine
+  yum:
+    name: "{{ docker_edition }}"
+    state: present
+    update_cache: yes
