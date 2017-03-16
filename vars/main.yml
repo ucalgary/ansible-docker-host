@@ -1,2 +1,4 @@
 ---
-# vars file for docker-engine
+docker_edition: 'docker-ce'
+docker_base_url: 'https://download.docker.com/linux/centos'
+docker_repo_url: '{{ docker_base_url }}/{{ docker_edition }}.repo'
