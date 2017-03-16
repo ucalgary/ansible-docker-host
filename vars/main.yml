@@ -1,4 +1,6 @@
----
 docker_edition: 'docker-ce'
 docker_base_url: 'https://download.docker.com/linux/centos'
 docker_repo_url: '{{ docker_base_url }}/{{ docker_edition }}.repo'
+
+docker_ce_gpg_fingerprint: '060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35'
+docker_ee_gpg_fingerprint: 'DD91 1E99 5A64 A202 E859 07D6 BC14 F10B 6D08 5F96'
