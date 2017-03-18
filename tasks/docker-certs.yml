@@ -1,0 +1,10 @@
+- name: Ensure certificates directory exists
+  file:
+    path: "{{ docker_certs_dir }}"
+    state: directory
+    owner: root
+    group: docker
+    mode: 0750
+  when: docker_tls_ca_certificate != None or
+        docker_tls_certificate != None or
+        docker_tls_key != None
