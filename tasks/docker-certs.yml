@@ -1,0 +1,26 @@
+- name: Ensure certificates directory exists
+  file:
+    path: "{{ docker_certs_dir }}"
+    state: directory
+    owner: root
+    group: docker
+    mode: 0750
+  when: docker_tls_ca_certificate != None or
+        docker_tls_certificate != None or
+        docker_tls_key != None
+
+- name: Copy TLS certificate files to hosts
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: docker
+    mode: 0440
+  with_items:
+    - src: "{{ docker_tls_ca_certificate }}"
+      dest: /etc/docker/certs.d/ca.pem
+    - src: "{{ docker_tls_certificate }}"
+      dest: /etc/docker/certs.d/server-cert.pem
+    - src: "{{ docker_tls_key }}"
+      dest: /etc/docker/certs.d/server-key.pem
+  when: item.src != None

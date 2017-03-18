@@ -8,3 +8,8 @@ docker_thinpool_size: '95%VG'
 docker_thinpoolmeta_size: '1%VG'
 
 configure_direct_lvm_storage: false
+
+docker_certs_dir: '/etc/docker/certs.d'
+docker_tls_ca_certificate: null
+docker_tls_certificate: null
+docker_tls_key: null
