@@ -6,3 +6,5 @@ docker_pvs: '/dev/sdb'
 
 docker_thinpool_size: '95%VG'
 docker_thinpoolmeta_size: '1%VG'
+
+configure_direct_lvm_storage: false
