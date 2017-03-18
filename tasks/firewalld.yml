@@ -29,3 +29,10 @@
     service: docker-swarm
     state: "{{ docker_swarm_manager }}"
     permanent: true
+
+- name: Set masquerade on public zone
+  firewalld:
+    zone: public
+    masquerade: yes
+    state: enabled
+    permanent: true
