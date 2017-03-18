@@ -1,2 +1,3 @@
 ---
-# tasks file for docker-engine
+- include: docker-engine.yml
+- include: direct-lvm-storage.yml
