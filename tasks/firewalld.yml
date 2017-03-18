@@ -1,0 +1,7 @@
+- name: Copy Docker firewalld services to hosts
+  copy:
+    src: files/firewalld-services/
+    dest: /etc/firewalld/services/
+    owner: root
+    group: root
+    mode: 0440
