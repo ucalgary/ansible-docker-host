@@ -1,2 +1,8 @@
----
-# defaults file for docker-engine
+docker_edition: 'docker-ce'
+docker_ce_variant: 'stable'
+
+docker_vg_name: 'docker'
+docker_pvs: '/dev/sdb'
+
+docker_thinpool_size: '95%VG'
+docker_thinpoolmeta_size: '1%VG'
