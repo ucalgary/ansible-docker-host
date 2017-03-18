@@ -13,3 +13,8 @@ docker_certs_dir: '/etc/docker/certs.d'
 docker_tls_ca_certificate: null
 docker_tls_certificate: null
 docker_tls_key: null
+
+docker_remote_api: 'disabled'
+docker_overlay_networking: 'disabled'
+docker_published_ports: 'disabled'
+docker_swarm_manager: 'disabled'

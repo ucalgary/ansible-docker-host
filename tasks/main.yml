@@ -4,3 +4,5 @@
 
 - include: direct-lvm-storage.yml
   when: configure_direct_lvm_storage
+
+- include: firewalld.yml
