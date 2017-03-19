@@ -5,6 +5,7 @@
   copy:
     content: "{{ docker_base_url }}"
     dest: /etc/yum/vars/dockerurl
+  when: docker_edition == 'docker-ee'
 
 - name: Ensure yum-utils is present
   yum:
