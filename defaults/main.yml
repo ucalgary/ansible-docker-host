@@ -9,9 +9,9 @@ docker_tlscacert: null
 docker_tlscert: null
 docker_tlskey: null
 
-docker_remote_api: 'disabled'
-docker_overlay_networking: 'disabled'
-docker_published_ports: 'disabled'
-docker_swarm_manager: 'disabled'
+enable_remote_api: false
+enable_swarm_overlay_networks: false
+enable_swarm_service_ports: false
+enable_swarm_manager_ports: false
 
 dockerd_disable_legacy_registry: true

@@ -9,25 +9,25 @@
 - name: Docker remote API ports
   firewalld:
     service: docker-engine
-    state: "{{ docker_remote_api }}"
+    state: "{{ 'enabled' if enable_remote_api else 'disabled' }}"
     permanent: true
 
 - name: Docker overlay networking ports
   firewalld:
     service: docker-overlay
-    state: "{{ docker_overlay_networking }}"
+    state: "{{ 'enabled' if enable_swarm_overlay_networks else 'disabled' }}"
     permanent: true
 
 - name: Docker published ports
   firewalld:
     service: docker-publish
-    state: "{{ docker_published_ports }}"
+    state: "{{ 'enabled' if enable_swarm_service_ports else 'disabled' }}"
     permanent: true
 
 - name: Docker swarm manager ports
   firewalld:
     service: docker-swarm
-    state: "{{ docker_swarm_manager }}"
+    state: "{{ 'enabled' if enable_swarm_manager_ports else 'disabled' }}"
     permanent: true
 
 - name: Set masquerade on public zone
