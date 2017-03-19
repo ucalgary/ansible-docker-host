@@ -5,6 +5,7 @@
   copy:
     content: "{{ docker_base_url }}"
     dest: /etc/yum/vars/dockerurl
+  when: docker_edition == 'docker-ee'
 
 - name: Ensure yum-utils is present
   yum:
@@ -14,18 +15,9 @@
 - name: Add the Docker repositories
   command: yum-config-manager --add-repo {{ docker_repo_url }}
 
-- name: Enable Docker CE stable repo
-  command: yum-config-manager --enable docker-ce-stable
-  when: "'{{ docker_edition }}' == 'docker-ce'"
-
 - name: Enable Docker CE {{ docker_ce_variant }} repo
   command: yum-config-manager --enable docker-ce-{{ docker_ce_variant }}
-  when: "'{{ docker_edition }}' == 'docker-ce' and '{{ docker_ce_variant }}' != 'stable'"
-
-- name: Disable other Docker CE repos
-  command: yum-config-manager --disable docker-ce-{{ docker_ce_variant }}
-  with_items: "{{ docker_ce_variants }}"
-  when: "'{{ docker_edition }}' == 'docker-ce' and item != '{{ docker_ce_variant }}' and item != 'stable'"
+  when: docker_edition == 'docker-ce' and docker_ce_variant != 'stable'
 
 - name: Install the Docker engine
   yum:
