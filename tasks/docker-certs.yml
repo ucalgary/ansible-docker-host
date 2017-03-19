@@ -39,3 +39,11 @@
       option: dockerd_tlskey
       dest: "{{ docker_certs_dir}}/key.pem"
   when: item.src != None
+
+- name: Enable tls and tls-verify daemon options
+  set_fact:
+    dockerd_tls: true
+    dockerd_tls_verify: true
+  when: docker_tls_ca_certificate != None or
+        docker_tls_certificate != None or
+        docker_tls_key != None
