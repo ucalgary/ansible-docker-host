@@ -4,7 +4,7 @@ docker_ce_variant: 'stable'
 docker_vg_name: 'docker'
 docker_pvs: '/dev/sdb'
 
-docker_certs_dir: '/etc/docker/certs.d'
+docker_certs_dir: '~/.docker'
 docker_tls_ca_certificate: null
 docker_tls_certificate: null
 docker_tls_key: null
