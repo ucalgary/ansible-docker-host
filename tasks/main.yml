@@ -3,3 +3,5 @@
 - include: docker-certs.yml
 
 - include: firewalld.yml
+
+- include: configuration.yml

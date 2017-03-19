@@ -13,3 +13,5 @@ docker_remote_api: 'disabled'
 docker_overlay_networking: 'disabled'
 docker_published_ports: 'disabled'
 docker_swarm_manager: 'disabled'
+
+dockerd_disable_legacy_registry: true
