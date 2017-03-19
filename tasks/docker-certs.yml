@@ -24,3 +24,18 @@
     - src: "{{ docker_tls_key }}"
       dest: "{{ docker_certs_dir}}/key.pem"
   when: item.src != None
+
+- name: Set TLS certificate files daemon options
+  set_fact:
+    "{{ item.option }}": "{{ item.dest }}"
+  with_items:
+    - src: "{{ docker_tls_ca_certificate }}"
+      option: dockerd_tlscacert
+      dest: "{{ docker_certs_dir}}/ca.pem"
+    - src: "{{ docker_tls_certificate }}"
+      option: dockerd_tlscert
+      dest: "{{ docker_certs_dir}}/cert.pem"
+    - src: "{{ docker_tls_key }}"
+      option: dockerd_tlskey
+      dest: "{{ docker_certs_dir}}/key.pem"
+  when: item.src != None
