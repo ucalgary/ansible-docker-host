@@ -18,11 +18,6 @@
   command: yum-config-manager --enable docker-ce-{{ docker_ce_variant }}
   when: "'{{ docker_edition }}' == 'docker-ce' and '{{ docker_ce_variant }}' != 'stable'"
 
-- name: Disable other Docker CE repos
-  command: yum-config-manager --disable docker-ce-{{ docker_ce_variant }}
-  with_items: "{{ docker_ce_variants }}"
-  when: "'{{ docker_edition }}' == 'docker-ce' and item != '{{ docker_ce_variant }}' and item != 'stable'"
-
 - name: Install the Docker engine
   yum:
     name: "{{ docker_edition }}"
