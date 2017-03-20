@@ -1,6 +1,6 @@
 # Docker Host
 
-A brief description of the role goes here.
+This role installs and configures Docker CE on Red Hat Enterprise Linux and CentOS 7 hosts. It also installs firewalld services and TLS certificates for Docker.
 
 ## Requirements
 
