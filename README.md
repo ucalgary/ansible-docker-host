@@ -8,7 +8,39 @@ This role requires Ansible 2.2 or higher, and platform requirements are listed i
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The variables that can be passed to this role and a brief description about them are as follows.
+
+    # The Docker edition: docker-ce or docker-ee
+    # For docker-ce, a variant can be specified: stable, edge, test
+    docker_edition: 'docker-ce'
+    docker_ce_variant: 'stable'
+
+    # Host path to install TLS certificate files
+    docker_certs_dir: '~/docker'
+
+    # Source paths for TLS certificate files
+    docker_tlscacert: 'files/ca.pem'
+    docker_tlscert: 'cert.pem'
+    docker_tlskey: 'key.pem'
+
+    # Enable the Docker remote API and firewalld service
+    # 2375/tcp, 2376/tcp
+    enable_remote_api: true
+
+    # Enable firewalld service for overlay networks
+    # 4789/udp, 7946/tcp, 7946/udp
+    enable_swarm_overlay_networks: true
+
+    # Enable firewalld service for default published service ports
+    # 30000-32767/tcp
+    enable_swarm_service_ports: true
+
+    # Enable firewalld service for swarm manager ports
+    # 2377/tcp
+    enable_swarm_manager_ports: true
+
+    # Disable contacting legacy registries
+    dockerd_disable_legacy_registry: true
 
 ## Dependencies
 
