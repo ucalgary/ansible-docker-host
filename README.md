@@ -42,6 +42,29 @@ The variables that can be passed to this role and a brief description about them
     # Disable contacting legacy registries
     dockerd_disable_legacy_registry: true
 
+In addition to the defined variables, this role will also process any variable starting with `dockerd_` into Docker daemon options, writing them into a `daemon.json` configuration file. Variables are processed by removing the leading `dockerd_` and replacing `_` characters with `-`. The following is an example of `dockerd_` options and the resulting `daemon.json` configuration.
+
+**Playbook Variables:**
+
+    dockerd_disable_legacy_registry: true
+    dockerd_experimental: true
+    dockerd_hosts:
+      - unix:///var/run/docker.sock
+      - tcp://0.0.0.0:2376
+    dockerd_metrics_addr: 0.0.0.0:9323
+
+**Daemon Configuration:**
+
+    {
+        "disable-legacy-registry": true,
+        "experimental": true,
+        "hosts": [
+            "unix:///var/run/docker.sock",
+            "tcp://0.0.0.0:2376"
+        ],
+        "metrics-addr": "0.0.0.0:9323"
+    }
+
 ## Dependencies
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
