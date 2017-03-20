@@ -1,5 +1,5 @@
 # See https://docs.docker.com/engine/reference/commandline/dockerd/ for options
-- name: Set Docker socket(s) to connect to
+- name: Set Docker sockets to connect to
   set_fact:
     dockerd_hosts:
       - unix:///var/run/docker.sock
