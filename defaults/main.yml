@@ -1,7 +1,7 @@
 docker_edition: 'docker-ce'
 docker_ce_variant: 'stable'
 
-docker_certs_dir: '~/.docker'
+docker_certs_dir: '/etc/docker/certs.d'
 docker_tlscacert: null
 docker_tlscert: null
 docker_tlskey: null
