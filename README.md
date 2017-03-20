@@ -1,38 +1,84 @@
-Role Name
-=========
+# Docker Host
 
-A brief description of the role goes here.
+This role installs and configures Docker CE on Red Hat Enterprise Linux and CentOS 7 hosts. It also installs firewalld services and TLS certificates for Docker.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role requires Ansible 2.2 or higher, and platform requirements are listed in the metadata file.
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The variables that can be passed to this role and a brief description about them are as follows.
 
-Dependencies
-------------
+    # The Docker edition: docker-ce or docker-ee
+    # For docker-ce, a variant can be specified: stable, edge, test
+    docker_edition: 'docker-ce'
+    docker_ce_variant: 'stable'
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+    # Host path to install TLS certificate files
+    docker_certs_dir: '~/docker'
 
-Example Playbook
-----------------
+    # Source paths for TLS certificate files
+    docker_tlscacert: 'files/ca.pem'
+    docker_tlscert: 'cert.pem'
+    docker_tlskey: 'key.pem'
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+    # Enable the Docker remote API and firewalld service
+    # 2375/tcp, 2376/tcp
+    enable_remote_api: true
 
-    - hosts: servers
+    # Enable firewalld service for overlay networks
+    # 4789/udp, 7946/tcp, 7946/udp
+    enable_swarm_overlay_networks: true
+
+    # Enable firewalld service for default published service ports
+    # 30000-32767/tcp
+    enable_swarm_service_ports: true
+
+    # Enable firewalld service for swarm manager ports
+    # 2377/tcp
+    enable_swarm_manager_ports: true
+
+    # Disable contacting legacy registries
+    dockerd_disable_legacy_registry: true
+
+In addition to the defined variables, this role will also process any variable starting with `dockerd_` into Docker daemon options, writing them into a `daemon.json` configuration file. Variables are processed by removing the leading `dockerd_` and replacing `_` characters with `-`. The following is an example of `dockerd_` options and the resulting `daemon.json` configuration.
+
+**Playbook Variables:**
+
+    dockerd_disable_legacy_registry: true
+    dockerd_experimental: true
+    dockerd_hosts:
+      - unix:///var/run/docker.sock
+      - tcp://0.0.0.0:2376
+    dockerd_metrics_addr: 0.0.0.0:9323
+
+**Daemon Configuration:**
+
+    {
+        "disable-legacy-registry": true,
+        "experimental": true,
+        "hosts": [
+            "unix:///var/run/docker.sock",
+            "tcp://0.0.0.0:2376"
+        ],
+        "metrics-addr": "0.0.0.0:9323"
+    }
+
+## Example Playbook
+
+The following example sets up a Docker host with Docker CE (edge variant) and experimental mode enabled.
+
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+        - role: ucalgary.docker-host
+          docker_ce_variant: 'edge'
+          dockerd_experimental: true
 
-License
--------
+## License
 
 Apache 2
 
-Author Information
-------------------
+## Author Information
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+King Chung Huang
