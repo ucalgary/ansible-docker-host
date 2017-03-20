@@ -67,11 +67,13 @@ In addition to the defined variables, this role will also process any variable s
 
 ## Example Playbook
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+The following example sets up a Docker host with Docker CE (edge variant) and experimental mode enabled.
 
-    - hosts: servers
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+        - role: ucalgary.docker-host
+          docker_ce_variant: 'edge'
+          dockerd_experimental: true
 
 ## License
 
